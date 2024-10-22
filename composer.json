@@ -1,0 +1,20 @@
+{
+    "$schema": "./schema.json",
+    "name": "mego/scandiweb-task",
+    "description": "A product management system using GraphQL and PHP",
+    "version": "1.0.0",
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/"
+        }
+    },
+    "authors": [
+        {
+            "name": "ahmedmagdy"
+        }
+    ],
+    "require": {
+        "webonyx/graphql-php": "^15.14",
+        "vlucas/phpdotenv": "^5.6"
+    }
+}

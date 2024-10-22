@@ -1,0 +1,38 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8000:80"
+    volumes:
+      - .:/var/www
+    depends_on:
+      - db
+    environment:
+      DB_HOST: db
+      DB_DATABASE: scandiweb
+      DB_USERNAME: root
+      DB_PASSWORD: your_mysql_root_password
+
+  db:
+    image: mysql:8.0
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_DATABASE: scandiweb
+      MYSQL_ROOT_PASSWORD: your_mysql_root_password
+    volumes:
+      - dbdata:/var/lib/mysql
+
+  frontend:
+    image: node:20
+    working_dir: /src
+    volumes:
+      - .:/src
+    ports:
+      - "3000:3000"
+    command: sh -c "npm install && npm run dev"
+
+volumes:
+  dbdata:
