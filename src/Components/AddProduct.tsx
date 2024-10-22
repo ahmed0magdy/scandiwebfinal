@@ -78,7 +78,9 @@ const AddProduct = () => {
       variables: {
         product: selectedProduct,
       },
-    });
+    }).catch(() => {
+      console.error("Error creating product");
+    })
     navigateToProductList();
   };
 
