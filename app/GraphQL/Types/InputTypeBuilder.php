@@ -16,7 +16,7 @@ class InputTypeBuilder
                 'sku' => Type::nonNull(Type::string()),
                 'name' => Type::nonNull(Type::string()),
                 'price' => Type::nonNull(Type::float()),
-                'attributes' => Type::listOf(self::buildAttributeInputType()),
+                'attributes' => Type::nonNull(Type::listOf(self::buildAttributeInputType())),
             ],
         ]);
     }
