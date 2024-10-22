@@ -74,14 +74,14 @@ const AddProduct = () => {
 
   const handleSubmit = () => {
     if (!validateInput()) return;
+    navigateToProductList();
     createProduct({
       variables: {
         product: selectedProduct,
       },
     }).catch(() => {
       console.error("Error creating product");
-    })
-    navigateToProductList();
+    });
   };
 
   return (
