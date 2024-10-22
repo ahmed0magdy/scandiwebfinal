@@ -1,10 +1,9 @@
 <?php
 
 return [
-    'host' => $_ENV['DB_HOST'],
-    'port' => $_ENV['DB_PORT'],
-    'dbname' => $_ENV['DB_NAME'],
-    'user' => $_ENV['DB_USERNAME'],
-    'password' => $_ENV['DB_PASSWORD'],
-    'charset' => $_ENV['DB_CHARSET'],
+    'host' => $_ENV['DB_HOST'] ?? 'database',
+    'port' => $_ENV['DB_PORT'] ?? '3306',
+    'dbname' => $_ENV['DB_NAME'] ?? 'scandi_db',
+    'user' => $_ENV['DB_USERNAME'] ?? 'scandi_user',
+    'password' => $_ENV['DB_PASSWORD'] ?? ''
 ];

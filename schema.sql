@@ -1,6 +1,7 @@
-DROP DATABASE IF EXISTS scandiweb;
-CREATE DATABASE scandiweb;
-USE scandiweb;
+CREATE DATABASE IF NOT EXISTS scandi_db;
+CREATE USER IF NOT EXISTS 'scandi_user'@'%' IDENTIFIED BY 'your_secure_password';
+GRANT ALL PRIVILEGES ON scandi_db.* TO 'scandi_user'@'%';
+FLUSH PRIVILEGES;
 
 
 -- Table for Categories

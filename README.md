@@ -75,7 +75,7 @@ project-root/
 └── vite.config.ts   # Vite configuration
 ```
 
-## 📦 Installation
+## 📦 Installation without Docker
 
 ### Backend Setup
 
@@ -111,6 +111,11 @@ project-root/
    ```bash
    npm run dev
    ```
+
+### 🐳 Docker Setup
+
+1. Clone the repository
+2. docker-compose up --build
 
 ## 🔧 Configuration
 

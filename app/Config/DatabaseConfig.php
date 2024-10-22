@@ -3,7 +3,6 @@
 namespace App\Config;
 
 use Dotenv\Dotenv;
-
 class DatabaseConfig
 {
     private array $config;
@@ -17,7 +16,7 @@ class DatabaseConfig
     private function loadEnvironment(): void
     {
         if (!isset($_ENV['DB_HOST'])) {
-            $rootPath = dirname(__DIR__, 2); // Go up two levels from /config to reach the project root
+            $rootPath = dirname(__DIR__, 2);
             $dotenv = Dotenv::createImmutable($rootPath);
             $dotenv->load();
         }
@@ -25,16 +24,12 @@ class DatabaseConfig
 
     private function loadConfig(): void
     {
-        // Load the configuration from the existing file
         $this->config = require __DIR__ . '/database.php';
-
-        // Add any additional keys that might not be in the original config
-        $this->config['persistent'] = $_ENV['DB_PERSISTENT'] ?? false;
     }
 
     public function getDsn(): string
     {
-        return "mysql:host={$this->config['host']};port={$this->config['port']};dbname={$this->config['dbname']};charset={$this->config['charset']}";
+        return "mysql:host={$this->config['host']};port={$this->config['port']};dbname={$this->config['dbname']};";
     }
 
     public function getUsername(): string
@@ -45,11 +40,6 @@ class DatabaseConfig
     public function getPassword(): string
     {
         return $this->config['password'];
-    }
-
-    public function isPersistent(): bool
-    {
-        return $this->config['persistent'];
     }
 
     public function isValid(): bool

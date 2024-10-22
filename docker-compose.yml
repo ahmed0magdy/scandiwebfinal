@@ -1,38 +1,51 @@
 services:
-  app:
+  frontend:
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: docker/frontend/Dockerfile
     ports:
-      - "8000:80"
+      - "5173:5173"
     volumes:
-      - .:/var/www
-    depends_on:
-      - db
+      - ./:/app
+      - /app/node_modules
     environment:
-      DB_HOST: db
-      DB_DATABASE: scandiweb
-      DB_USERNAME: root
-      DB_PASSWORD: your_mysql_root_password
+      - VITE_GRAPHQL_ENDPOINT=http://localhost/
+    depends_on:
+      - backend
 
-  db:
+  backend:
+    build:
+      context: .
+      dockerfile: docker/backend/Dockerfile
+    ports:
+      - "80:80"
+    volumes:
+      - ./:/var/www/html
+      - /var/www/html/vendor
+    environment:
+      - DB_HOST=database
+      - DB_NAME=${DB_NAME}
+      - DB_USER=${DB_USERNAME}
+      - DB_PASS=${DB_PASSWORD}
+    env_file:
+      - .env
+    depends_on:
+      - database
+
+  database:
     image: mysql:8.0
     ports:
       - "3306:3306"
     environment:
-      MYSQL_DATABASE: scandiweb
-      MYSQL_ROOT_PASSWORD: your_mysql_root_password
+      - MYSQL_DATABASE=${DB_NAME}
+      - MYSQL_USER=${DB_USERNAME}
+      - MYSQL_PASSWORD=${DB_PASSWORD}
+      - MYSQL_ROOT_PASSWORD=${DB_ROOT_PASSWORD}
     volumes:
-      - dbdata:/var/lib/mysql
-
-  frontend:
-    image: node:20
-    working_dir: /src
-    volumes:
-      - .:/src
-    ports:
-      - "3000:3000"
-    command: sh -c "npm install && npm run dev"
+      - mysql_data:/var/lib/mysql
+      - ./schema.sql:/docker-entrypoint-initdb.d/schema.sql
+    env_file:
+      - .env
 
 volumes:
-  dbdata:
+  mysql_data:

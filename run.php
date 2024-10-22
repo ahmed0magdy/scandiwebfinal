@@ -19,7 +19,6 @@ try {
     $password = $dbConfig->getPassword();
     $options = [
         PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-        PDO::ATTR_PERSISTENT => $dbConfig->isPersistent(),
     ];
 
     // Create a PDO instance
