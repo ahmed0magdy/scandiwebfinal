@@ -1,9 +1,3 @@
-CREATE DATABASE IF NOT EXISTS scandi_db;
-CREATE USER IF NOT EXISTS 'scandi_user'@'%' IDENTIFIED BY 'your_secure_password';
-GRANT ALL PRIVILEGES ON scandi_db.* TO 'scandi_user'@'%';
-FLUSH PRIVILEGES;
-
-
 -- Table for Categories
 CREATE TABLE Categories (
     id INT AUTO_INCREMENT PRIMARY KEY,
