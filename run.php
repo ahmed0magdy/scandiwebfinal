@@ -27,7 +27,7 @@ try {
     echo "Connected successfully. Running schema script...\n";
 
     $pdo->exec("DROP DATABASE IF EXISTS {$_ENV['DB_NAME']}");
-    $pdo->exec("CREATE DATABASE IF NOT EXISTS {$_ENV['DB_NAME']}");
+    $pdo->exec("CREATE DATABASE {$_ENV['DB_NAME']}");
     $pdo->exec("USE {$_ENV['DB_NAME']}");
 
     // Read the SQL file

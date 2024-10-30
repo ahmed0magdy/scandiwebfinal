@@ -19,7 +19,7 @@ const CategoryAttributes = ({
         <Form.Group as={Row} key={attr.id} className="mb-3">
           <Form.Label htmlFor={attr.name.toLowerCase()} column sm={3}>
             {attr.name} (
-            {attr.name === "size" ? "MB" : attr.name === "weight" ? "Kg" : "cm"}
+            {attr.name === "Size" ? "MB" : attr.name === "Weight" ? "Kg" : "cm"}
             )
           </Form.Label>
           <Col sm={9}>
