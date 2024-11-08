@@ -3,6 +3,7 @@
 namespace App\Config;
 
 use Dotenv\Dotenv;
+
 class DatabaseConfig
 {
     private array $config;
@@ -32,6 +33,11 @@ class DatabaseConfig
         return "mysql:host={$this->config['host']};port={$this->config['port']};dbname={$this->config['dbname']};";
     }
 
+    public function getBaseDsn(): string
+    {
+        return "mysql:host={$this->config['host']};port={$this->config['port']}";
+    }
+
     public function getUsername(): string
     {
         return $this->config['user'];
@@ -40,6 +46,11 @@ class DatabaseConfig
     public function getPassword(): string
     {
         return $this->config['password'];
+    }
+
+    public function getDatabaseName(): string
+    {
+        return $this->config['dbname'];
     }
 
     public function isValid(): bool
